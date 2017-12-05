@@ -1,0 +1,19 @@
+######### input of Liquid Scintillator#########
+
+/run/numberOfThreads 4
+/run/initialize
+/tracking/verbose 0
+
+######## input of source information ####
+#
+/Source/Gun/GPSFlag self
+/Source/Gun/SourceRadius 0.0 cm
+/Source/Gun/ParticleName neutron
+/Source/Gun/SourceType mono
+/Source/Gun/SourceEnergy 2500 keV
+/Source/Gun/SEconst 0.00 MeV
+/Source/Gun/SourcePosition_z -10 cm
+/Source/Gun/MomentumThetaRange 0.0 deg
+#
+/run/beamOn 500000
+/control/execute vis.mac
