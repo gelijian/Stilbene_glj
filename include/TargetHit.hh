@@ -50,15 +50,15 @@ class TargetHit : public G4VHit
         inline void  operator delete(void*);
 
         // Set methods
+        void SetParticleName (G4String data) {particleName = data;};
         void SetTrackID (G4int data) {trackID = data;};
         void SetEdep (G4double data) {edep = data;};
-        void SetParticleName (G4String data) {particleName = data;};
         void SetMomentumDirection (G4ThreeVector data) {momentumDirection = data; };
 
         // Get methods
+        G4String GetParticleName() const {return particleName; };
         G4int GetTrackID() const {return trackID; };
         G4double GetEdep() const {return edep; };
-        G4String GetParticleName() const {return particleName; };
         G4ThreeVector GetMomentumDirection() const {return momentumDirection; };
     private:
     
