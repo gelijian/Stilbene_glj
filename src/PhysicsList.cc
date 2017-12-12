@@ -118,7 +118,7 @@ void PhysicsList::ConstructHadrPhys()
 	
 	// TrackingCut of Neutron,  energy: 10keV
 	G4NeutronTrackingCut* NeuCut = new G4NeutronTrackingCut("nTackingCut",verboseLevel);
-	NeuCut->SetKineticEnergyLimit(1.0E-3*MeV);   // 1keV
+	NeuCut->SetKineticEnergyLimit(1.0E-3*MeV);   // 10keV
     hadronPhys.push_back(NeuCut);
 	
 }
@@ -135,6 +135,9 @@ void PhysicsList::SetCuts()
 	// because some processes for e+/e- need cut values for gamma
 	//
     SetCutsWithDefault();
+    G4double electronCut = 0.005 * mm;
+    SetCutValue(electronCut, "e+");
+    SetCutValue(electronCut, "e-");
      
 	if (verboseLevel>0) DumpCutValuesTable();
     G4cout << "come Phys Cuts Setting" << G4endl;

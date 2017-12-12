@@ -64,7 +64,7 @@ void EventAction::BeginOfEventAction(const G4Event* event)
     {
         G4cout << "eventID: " << eventID  << G4endl;
     }
-    //G4cout << "eventID: " << eventID << G4endl;
+    G4cout << "eventID: " << eventID << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -81,6 +81,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
     if (nofHits == 0)
         return;
         
+    G4double threshold = 10;
     G4double Eee = 0.0;
     G4int NumProtonHits = 0;
     G4int NumCarbonHits = 0;
@@ -90,7 +91,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
         G4double edep = (*HC)[i]->GetEdep();
         G4ThreeVector momentumDirection =  (*HC)[i]->GetMomentumDirection();
         G4double momentumZ = momentumDirection.getZ();
-        //G4cout << particleName << G4endl;
+        
         //  Count the hits on different particles
         if (particleName == "proton")
         {
@@ -113,10 +114,13 @@ void EventAction::EndOfEventAction(const G4Event* event)
         G4double EeeRaw = LOPutil::GetInstance() -> GetEee(edep, particleName);
         Eee += EeeRaw * (1 + factorEnergy * factorAngle);
     }
-    analysisManager->FillNtupleDColumn(0, Eee);
-    analysisManager->FillNtupleIColumn(1, NumProtonHits);
-    analysisManager->FillNtupleIColumn(2, NumCarbonHits);
-    analysisManager->AddNtupleRow();
+    if (Eee > threshold)
+    {
+        analysisManager->FillNtupleDColumn(0, Eee);
+        analysisManager->FillNtupleIColumn(1, NumProtonHits);
+        analysisManager->FillNtupleIColumn(2, NumCarbonHits);
+        analysisManager->AddNtupleRow();
+    }
 }  
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

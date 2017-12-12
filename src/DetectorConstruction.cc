@@ -195,8 +195,9 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
                                     fCheckOverlaps);
     
     //front shell
-    G4Tubs * shellfrontSV = new G4Tubs("shellfrontSV", 0 * mm, shellRadius, shellThickness / 2, 0 * deg, 360 * deg);
-    G4double shellfontPosition = -(shellLength + shellThickness) / 2;
+    G4double shellfrontLength = 1.0 * mm;
+    G4Tubs * shellfrontSV = new G4Tubs("shellfrontSV", 0 * mm, shellRadius, shellfrontLength / 2, 0 * deg, 360 * deg);
+    G4double shellfontPosition = -(shellLength + shellfrontLength) / 2;
     shellfrontLV = new G4LogicalVolume(shellfrontSV, fshellMaterial, "shellfrontLV");
     shellfrontPV = new G4PVPlacement(0,
                                      G4ThreeVector(0 * cm, 0 * cm, shellfontPosition),
@@ -210,7 +211,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
     
     // Pyrex Glass windows, to PMT
     G4double pyrexWindowRadius = shellRadius;
-    G4double pyrexWindowLength = 1.02 * cm;
+    G4double pyrexWindowLength = 0.32 * cm;
     G4double pyrexWindowPosition = (targetLength + pyrexWindowLength) / 2;
     G4Tubs* pyrexWindowSV = new G4Tubs("pyrexWindowSV", 0 * mm,  pyrexWindowRadius, pyrexWindowLength / 2, 0 * deg, 360 * deg);
     pyrexWindowLV = new G4LogicalVolume(pyrexWindowSV, fpyrexWindowMaterial, "PyrexWindowLV");

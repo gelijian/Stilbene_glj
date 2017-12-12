@@ -130,7 +130,7 @@ double LOPutil::GetEee(double E,G4String pname)
 //For electron and positron
     if(pname== "e-" || pname== "e+")
     {
-        return Eion * 1000;     // in keV
+        return Eion * 1000;
     }
     G4cout << pname << endl;
     G4cout << "Warning: Do noting in function 'GetEee(double,G4String)'"<< G4endl;
